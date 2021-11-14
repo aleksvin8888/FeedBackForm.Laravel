@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Main\FeedBackFormController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +15,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+//Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('auth');
+
+
+Route::group([
+    'middleware' => 'auth',
+],
+    function() {
+
+        Route::get('/', [HomeController::class, 'index'])->name('main');
+        Route::get('/feedbackform', [FeedBackFormController::class, 'create' ])->name('main.feedbackform.create');
+        Route::post('/feedbackform', [FeedBackFormController::class, 'store' ])->name('main.feedbackform.store');
+
+    });
 
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
