@@ -25,7 +25,7 @@ class StatusSeeder extends Seeder
             ],
             [
                 'related_model' => FeedBack::class,
-                'slug' => 'draft',
+                'slug' => 'processed',
                 'title' => 'Опрацьвано',
             ],
             [

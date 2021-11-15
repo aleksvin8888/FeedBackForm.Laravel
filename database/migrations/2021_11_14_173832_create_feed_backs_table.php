@@ -18,11 +18,17 @@ class CreateFeedBacksTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->integer('user_id')->unsigned();
+            $table->bigInteger('status_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
+                ->onDelete('cascade');
+
+            $table->foreign('status_id')
+                ->references('id')
+                ->on('statuses')
                 ->onDelete('cascade');
         });
     }

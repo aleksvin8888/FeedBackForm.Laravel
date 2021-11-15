@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 /**
  * App\Models\FeedBack
@@ -26,15 +27,34 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @method static \Illuminate\Database\Eloquent\Builder|FeedBack whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|FeedBack whereUserId($value)
  * @mixin \Eloquent
+ * @property int $status_id
+ * @property-read \App\Models\User $user
+ * @method static \Illuminate\Database\Eloquent\Builder|FeedBack whereStatusId($value)
  */
 class FeedBack extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+
+    ];
+
 
     public function status():BelongsTo
     {
         return $this->belongsTo(Status::class);
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function file(): MorphOne
+    {
+        return $this->morphOne(File::class, 'fileable');
     }
 
 }
