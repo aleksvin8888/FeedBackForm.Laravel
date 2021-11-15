@@ -30,6 +30,7 @@ use Illuminate\Database\Eloquent\Relations\MorphOne;
  * @property int $status_id
  * @property-read \App\Models\User $user
  * @method static \Illuminate\Database\Eloquent\Builder|FeedBack whereStatusId($value)
+ * @property-read \App\Models\File|null $file
  */
 class FeedBack extends Model
 {

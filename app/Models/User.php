@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Roles\HasRolesTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -40,6 +41,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @mixin \Eloquent
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
  * @property-read int|null $roles_count
+ * @property-read \App\Models\Role $role
  */
 class User extends Authenticatable
 {
@@ -93,7 +95,6 @@ class User extends Authenticatable
     {
         return $this->hasRole('user');
     }
-
 
 
 }

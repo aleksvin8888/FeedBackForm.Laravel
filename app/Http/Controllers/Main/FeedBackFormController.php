@@ -4,11 +4,14 @@ namespace App\Http\Controllers\Main;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateFeedBackRequest;
+use App\Mail\User\FeedBackMail;
+use App\Models\User;
 use App\Services\FeedBackService;
 use Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 
 class FeedBackFormController extends Controller
@@ -33,10 +36,13 @@ class FeedBackFormController extends Controller
     public function store(CreateFeedBackRequest $request): RedirectResponse
     {
 
+        $mailManager = User::where('id', '=', '1')->select('email')->first();
+
         $feedBack = $this
             ->feedBackService
             ->create($request->validated());
         if($feedBack) {
+            Mail::to($mailManager->email)->send(new FeedBackMail($feedBack));
             return redirect()->route('main.feedbackform.create')
                 ->with('success', 'Ваша  форма успішно відправлена в обробку.');
         } else {

@@ -39,7 +39,7 @@ final class FileService extends MySqlService
 
             DB::commit();
 
-            return $file;
+            return  $model;
         } catch (Exception $exception) {
             $this->handleException($exception);
         }
