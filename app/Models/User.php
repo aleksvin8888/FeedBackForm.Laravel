@@ -6,6 +6,8 @@ use App\Traits\Roles\HasRolesTrait;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -42,6 +44,8 @@ use Laravel\Sanctum\HasApiTokens;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Role[] $roles
  * @property-read int|null $roles_count
  * @property-read \App\Models\Role $role
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\FeedBack[] $feedbacks
+ * @property-read int|null $feedbacks_count
  */
 class User extends Authenticatable
 {
@@ -80,11 +84,6 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-
-    public function isAdmin(): bool
-    {
-        return $this->hasRole('admin');
-    }
 
     public function isManager(): bool
     {

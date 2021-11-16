@@ -43,7 +43,7 @@ class FeedBack extends Model
     ];
 
 
-    public function status():BelongsTo
+    public function status(): BelongsTo
     {
         return $this->belongsTo(Status::class);
     }
@@ -57,5 +57,6 @@ class FeedBack extends Model
     {
         return $this->morphOne(File::class, 'fileable');
     }
+
 
 }

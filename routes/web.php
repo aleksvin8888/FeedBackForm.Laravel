@@ -26,6 +26,7 @@ Route::group([
         Route::get('/feedbackform', [FeedBackFormController::class, 'create'])->name('main.feedbackform.create');
         Route::post('/feedbackform', [FeedBackFormController::class, 'store'])->name('main.feedbackform.store');
 
+
         Route::group([
             'middleware' => 'role:manager',
         ], function() {
